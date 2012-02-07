@@ -7,6 +7,7 @@ var gameVM = new function(game){
 
 	self.newGame = function(){
 		model.newGame();
+		animation.resetTokens();
 	}
 	
 	self.nextTurn = function(){
@@ -46,6 +47,11 @@ var gameVM = new function(game){
 		
 		model.positionChanged(function(newPosition){
 			playerSelf.position(newPosition);
+			if (newPosition > 100) {
+				animation.animateToken(model.getName(), 100);
+			} else {
+				animation.animateToken(model.getName(), newPosition);
+			}
 		});
 		model.nameChanged(function(newName){
 			playerSelf.name(newName);

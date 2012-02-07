@@ -9,7 +9,7 @@ var game = new function(){
 							new SnakeOrLadder(87,24), new SnakeOrLadder(93,73), new SnakeOrLadder(95,75), new SnakeOrLadder(98,79)];
 	
 	gameSelf.newGame = function(){
-		players = [new Player("Player 1"), new Player("Player 2")];
+		players = [new Player("Player1"), new Player("Player2")];
 		playerTurn = Math.floor(Math.random()*players.length);
 		InvokeCB(gameStateChangedCallback, false);
 		InvokeCB(playersChangedCallback, players);
