@@ -1,0 +1,36 @@
+<!DOCTYPE html">
+<html>
+	<head>
+		<title>Snakes and Ladders</title>
+	</head>
+	<body>
+	<h1>Snakes and Ladders</h1>
+	
+	<h2>Players</h2>
+	<table>
+    <thead><tr>
+        <th>Player name</th><th>Position</th><th></th>
+    </tr></thead>
+		<tbody data-bind="foreach: players"><tr>
+			<td><input data-bind="value: name" /></td>
+			<td data-bind="text: position"></td>
+			<td data-bind="text: name"></td>
+			<!-- <td><a href="#" data-bind="click: $root.removeSeat">Remove</a></td> -->
+		</tr></tbody>
+	</table>
+		<input type="button" value="Reset" onClick="game.newGame();"></input>
+		
+		<button data-bind="click: nextTurn, enable: isGameOver() == false">Roll next turn</button>
+		<input type="button" value="Game Status" onClick="game.gameState();"></input>
+		
+		<input type="button" value="Test Victory" onClick="game.testVictory();"></input>
+		
+		<img src="Game-Board-Snakes-and-Ladders-Full.gif"  width="1800" height="1800"/>
+		
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="knockout-2.0.0.debug.js" type="text/javascript"></script>
+		<script src="SnakesAndLaddersLogic.js" type="text/javascript"></script>		
+		<script src="ViewModelSnakeAndLadders.js" type="text/javascript"></script>
+	</body>
+</html>
