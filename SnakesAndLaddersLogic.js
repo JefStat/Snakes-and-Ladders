@@ -37,10 +37,6 @@ var game = new function(){
 		InvokeCB(currentPlayerChangedCallback, game.getPlayerTurn());
 	}
 
-	gameSelf.rollDice = function(){
-		return Math.ceil(Math.random()*6);
-	}
-
 	gameSelf.nextTurn = function(){
 		if (!game.isGameOver()){
 			game.getPlayerTurn().move(snakesAndLadders);
@@ -106,15 +102,26 @@ var game = new function(){
 			return name;
 		}
 		
+		function rollDice(){
+			var result = Math.ceil(Math.random()*6);
+			InvokeCB(diceRolledCallback, result);
+			return result;
+		}
+		
 		
 		var positionChangedCallback = new Array();
 		var nameChangedCallback = new Array();
+		var diceRolledCallback = new Array();
 		
 		playerSelf.positionChanged = function(cb){
 			positionChangedCallback.push(cb);
 		}
 		playerSelf.nameChanged = function(cb){
 			nameChangedCallback.push(cb);
+		}
+		
+		playerSelf.diceRolled = function(cb){
+			diceRolledCallback.push(cb);
 		}
 		
 		function InvokeCB(cb, arg)
@@ -126,14 +133,14 @@ var game = new function(){
 		}
 		
 		playerSelf.move = function(snakesAndLadders){
-			position = game.rollDice() + position;
-			var i;
-			for (i = 0; i < snakesAndLadders.length; i++){
+			position = rollDice() + position;
+			InvokeCB(positionChangedCallback,position);
+			for (var i = 0; i < snakesAndLadders.length; i++){
 				if (position == snakesAndLadders[i].getHead()){
 					position = snakesAndLadders[i].getTail();
+					InvokeCB(positionChangedCallback,position);
 				}
 			}
-			InvokeCB(positionChangedCallback,position);
 		}
 	}
 	

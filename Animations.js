@@ -23,14 +23,14 @@ var animation = new function(board_height, board_width, preamble){
 							if (y % 2 == 1)
 							{// if y is odd x is inversed for the alternating left to right movement
 								x = 10 - x;
-								if(x==10){x=x-1;} //special case for 
+								if(x==10){x=x-1;} //special case for positions 10/30/50/70/90
 							} else {
-								if( x != 0){ x = x - 1;}
+								if( x != 0){ x = x - 1;}//special case for 20/40/60/80/100
 							}
 							if (x == 0) {
-								y = 10 - y; //board is completed from bottom up.
-							} else {
-								if (y % 2 == 1 && x==9 && position != 91) {
+								y = 10 - y; //special case for 20/40/60/80/100
+							} else { //board is completed from bottom up.
+								if (y % 2 == 1 && x==9 && position % 10 != 1) {//special case for 11/31/51/71/91
 									y = 10 - y;
 								} else {
 									y = 9 - y;

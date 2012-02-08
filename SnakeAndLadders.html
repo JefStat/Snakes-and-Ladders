@@ -19,13 +19,12 @@
 		<h2>Players</h2>
 		<table>
 		<thead><tr>
-			<th>Player name</th><th>Position</th><th></th>
+			<th>Player name</th><th>Position</th><th>Dice Roll</th>
 		</tr></thead>
 			<tbody data-bind="foreach: players"><tr>
 				<td><input data-bind="value: name" /></td>
 				<td data-bind="text: position"></td>
-				<td data-bind="text: name"></td>
-				<!-- <td><a href="#" data-bind="click: $root.removeSeat">Remove</a></td> -->
+				<td data-bind="text: diceRoll"></td>
 			</tr></tbody>
 		</table>
 		<input type="button" value="Reset" onClick="gameVM.newGame();"></input>
@@ -41,8 +40,6 @@
 		</div>
 		<img id="board" src="Game-Board-Snakes-and-Ladders-Full_no_boarder.gif" ></img>
 	</div>
-		
-		
 	</body>
 	
 	<script src="jquery.min.js" type="text/javascript"></script>

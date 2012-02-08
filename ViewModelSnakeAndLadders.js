@@ -38,7 +38,8 @@ var gameVM = new function(game){
 		var playerSelf = this;
 		var model = aPlayer;
 		playerSelf.position = ko.observable(aPlayer.getPosition());
-		playerSelf.name = ko.observable(aPlayer.getName());		
+		playerSelf.name = ko.observable(aPlayer.getName());
+		playerSelf.diceRoll = ko.observable();
 		
 		playerSelf.setName = function(newName){
 			model.setName(newName);
@@ -55,6 +56,9 @@ var gameVM = new function(game){
 		});
 		model.nameChanged(function(newName){
 			playerSelf.name(newName);
+		});
+		model.diceRolled(function(diceRollValue){
+			playerSelf.diceRoll(diceRollValue);
 		});
 	}
 	game.newGame();
