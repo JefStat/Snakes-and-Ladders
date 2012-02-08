@@ -1,7 +1,6 @@
 // Define the entry point
 $(document).ready(function()
 {
-	gameVM.newGame();
 	animation.resetTokens();
 });
 var animation = new function(board_height, board_width, preamble){
@@ -24,7 +23,7 @@ var animation = new function(board_height, board_width, preamble){
 							if (y % 2 == 1)
 							{// if y is odd x is inversed for the alternating left to right movement
 								x = 10 - x;
-								if(x==10){x=x-1;}
+								if(x==10){x=x-1;} //special case for 
 							} else {
 								if( x != 0){ x = x - 1;}
 							}

@@ -57,5 +57,6 @@ var gameVM = new function(game){
 			playerSelf.name(newName);
 		});
 	}
+	game.newGame();
 }(game);
 ko.applyBindings(gameVM);
