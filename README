@@ -1,0 +1,17 @@
+Ideas to expands upon:
+
+-Global animation queue so every token finish it's turn before the next token begins to move.
+-Network play, Node.js .
+-Mobile versions namely accomdating browser resizing or any browser size.
+-Expanded rule set
+	a. Must roll to 100 exactly if not exact don't move or roll backwards.
+	b. More dice or dice cards 
+	c. Additional actions other than rolling.
+	
+-Add and remove players.
+-Random board generation.
+-html5 canvas board, three.js.
+-More information on the view:
+	a. different token colors. 
+	b. Hover information.
+	c. Highlighting current player's turn.
