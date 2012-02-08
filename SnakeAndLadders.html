@@ -21,8 +21,8 @@
 		<thead><tr>
 			<th>Player name</th><th>Position</th><th>Dice Roll</th>
 		</tr></thead>
-			<tbody data-bind="foreach: players"><tr>
-				<td><input data-bind="value: name" /></td>
+			<tbody data-bind="foreach: players"><tr data-bind="style: {backgroundColor: gameVM.currentTurn().name == $data.name ?  'red' : 'green' }">
+				<td><p data-bind="visible: !editing(), text: name, click: edit">&nbsp;</p><input data-bind="visible: editing, value: name, hasfocus: editing" /></td>
 				<td data-bind="text: position"></td>
 				<td data-bind="text: diceRoll"></td>
 			</tr></tbody>

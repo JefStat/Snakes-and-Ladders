@@ -40,13 +40,9 @@ var game = new function(){
 		InvokeCB(playerAddedCallback,aPlayer);
 	}
 	
-	gameSelf.getPlayersNames = function(){
-		var i = 0;
-		var result = new Array(players.length);
-		for (i=0;i<players.length;i++){
-			result[i] = players[i].name;
-		}
-		return result;
+	gameSelf.removePlayer = function(aPlayer){
+		var idx = players.indexOf(aPlayer);
+		if(idx!=-1) visibleIds.splice(idx, 1);
 	}
 
 	function updateTurn(){

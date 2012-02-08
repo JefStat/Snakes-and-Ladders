@@ -55,7 +55,7 @@ var animation = new function(board_height, board_width, preamble){
 	}
 
 	self.resetTokens = 	function(players){
-							$(".tokens").clearQueue().stop();
+							//$(".tokens").clearQueue().stop(); Doesn't work but it's needed.
 							$(".tokens").css({
 								top: 	function(index, value){
 											return square_height * 9;

@@ -17,7 +17,7 @@ var gameVM = new function(game){
 	self.nextTurn = function(){
 		model.nextTurn();
 	}
-
+	
 	self.isGameOver = ko.computed( function(){
 		return self.gameState();
 	});
@@ -45,6 +45,8 @@ var gameVM = new function(game){
 		playerSelf.position = ko.observable(aPlayer.getPosition());
 		playerSelf.name = ko.observable(aPlayer.getName());
 		playerSelf.diceRoll = ko.observable();
+		playerSelf.editing = ko.observable(false);
+		playerSelf.edit = function() { playerSelf.editing(true); }
 		
 		playerSelf.setName = function(newName){
 			model.setName(newName);
@@ -68,4 +70,31 @@ var gameVM = new function(game){
 	}
 	game.defaultSetup();
 }(game);
+
+/** Validate player names idea code from http://knockoutjs.com/documentation/extenders.html
+ko.extenders.required = function(target, overrideMessage) {
+    //add some sub-observables to our observable
+    target.hasError = ko.observable();
+    target.validationMessage = ko.observable();
+ 
+    //define a function to do validation
+    function validate(newValue) {
+       target.hasError(newValue ? false : true);
+       target.validationMessage(newValue ? "" : overrideMessage || "This field is required");
+    }
+ 
+    //initial validation
+    validate(target());
+ 
+    //validate whenever the value changes
+    target.subscribe(validate);
+ 
+    //return the original observable
+    return target;
+};
+function AppViewModel(first, last) {
+    this.firstName = ko.observable(first).extend({ required: "Please enter a first name" });
+    this.lastName = ko.observable(last).extend({ required: "" });
+} */
+
 ko.applyBindings(gameVM);
