@@ -36,6 +36,10 @@ var animation = new function(board_height, board_width, preamble){
 									y = 9 - y;
 								}
 							}
+							if (position == 0){
+								x = -1;
+								y = 9;
+							}
 							move(token,x,y);
 						}
 	
@@ -51,6 +55,7 @@ var animation = new function(board_height, board_width, preamble){
 	}
 
 	self.resetTokens = 	function(players){
+							$(".tokens").clearQueue().stop();
 							$(".tokens").css({
 								top: 	function(index, value){
 											return square_height * 9;

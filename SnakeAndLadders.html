@@ -29,8 +29,10 @@
 		</table>
 		<input type="button" value="Reset" onClick="gameVM.newGame();"></input>
 		<button data-bind="click: nextTurn, enable: isGameOver() == false">Roll next turn</button>
+		<button data-bind="click: addPlayer">Add Player</button>
 		<input type="button" value="Game Status" onClick="game.gameState();"></input>
 		<input type="button" value="Test Victory" onClick="game.testVictory();"></input>
+		<input type="button" value="Reset Game" onClick="gameVM.defaultSetup()" ></input>
 	</div>
 		
 		

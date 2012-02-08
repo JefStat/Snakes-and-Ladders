@@ -8,11 +8,22 @@ var game = new function(){
 							new SnakeOrLadder(51,67), new SnakeOrLadder(54,34), new SnakeOrLadder(62,19), new SnakeOrLadder(64,60), new SnakeOrLadder(71,91), new SnakeOrLadder(80,100), 
 							new SnakeOrLadder(87,24), new SnakeOrLadder(93,73), new SnakeOrLadder(95,75), new SnakeOrLadder(98,79)];
 	
-	gameSelf.newGame = function(){
-		players = [new Player("Player1"), new Player("Player2")];
+	gameSelf.defaultSetup = function(){
+		players = [];
+		gameSelf.addPlayer();
+		gameSelf.addPlayer();
 		playerTurn = Math.floor(Math.random()*players.length);
+		InvokeCB(currentPlayerChangedCallback, game.getPlayerTurn());
 		InvokeCB(gameStateChangedCallback, false);
-		InvokeCB(playersChangedCallback, players);
+	}
+	
+	gameSelf.newGame = function(){
+		for(var i = 0; i < players.length; i++){
+			players[i].resetPosition();
+		}
+		InvokeCB(gameStateChangedCallback, false);
+		playerTurn = Math.floor(Math.random()*players.length);
+		InvokeCB(currentPlayerChangedCallback, game.getPlayerTurn());
 	}
 	
 	gameSelf.getPlayers = function(){
@@ -21,6 +32,12 @@ var game = new function(){
 
 	gameSelf.getPlayerTurn = function(){
 		return players[ playerTurn ];
+	}
+	
+	gameSelf.addPlayer = function(){
+		var aPlayer = new Player("Player" + players.length);
+		players.push(aPlayer)
+		InvokeCB(playerAddedCallback,aPlayer);
 	}
 	
 	gameSelf.getPlayersNames = function(){
@@ -57,12 +74,12 @@ var game = new function(){
 		return result;
 	}
 	
-	var playersChangedCallback = new Array();
+	var playerAddedCallback = new Array();
 	var currentPlayerChangedCallback = new Array();
 	var gameStateChangedCallback = new Array();
 	
-	gameSelf.playersChanged = function(cb){
-		playersChangedCallback.push(cb);
+	gameSelf.playerAdded = function(cb){
+		playerAddedCallback.push(cb);
 	}
 	
 	gameSelf.currentPlayerChanged = function(cb){
@@ -91,6 +108,11 @@ var game = new function(){
 		
 		playerSelf.getPosition = function(){
 			return position;
+		}
+		
+		playerSelf.resetPosition = function(){
+			position = START;
+			InvokeCB(positionChangedCallback,position);
 		}
 		
 		playerSelf.setName = function(newName){

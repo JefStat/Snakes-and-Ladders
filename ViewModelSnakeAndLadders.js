@@ -5,9 +5,13 @@ var gameVM = new function(game){
 	self.gameState = ko.observable();
 	var model = game;
 
+	self.defaultSetup = function(){
+		self.players.removeAll();
+		game.defaultSetup();
+	}
+	
 	self.newGame = function(){
 		model.newGame();
-		animation.resetTokens();
 	}
 	
 	self.nextTurn = function(){
@@ -18,12 +22,13 @@ var gameVM = new function(game){
 		return self.gameState();
 	});
 	
-	model.playersChanged(function(newPlayers){
-		self.players($.map(newPlayers,function(item)
-				{
-					return new PlayerVM(item);
-				}			)
-		);
+	self.addPlayer = function(){
+		model.addPlayer();
+	}
+	
+	model.playerAdded(function(addedPlayer){
+		self.players.push( new PlayerVM(addedPlayer));
+		animation.animateToken(addedPlayer.getName(), 0);
 	});
 	
 	model.currentPlayerChanged(function(whoseTurn){
@@ -61,6 +66,6 @@ var gameVM = new function(game){
 			playerSelf.diceRoll(diceRollValue);
 		});
 	}
-	game.newGame();
+	game.defaultSetup();
 }(game);
 ko.applyBindings(gameVM);
