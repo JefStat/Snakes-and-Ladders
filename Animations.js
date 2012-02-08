@@ -1,6 +1,7 @@
 // Define the entry point
 $(document).ready(function()
 {
+	gameVM.newGame();
 	animation.resetTokens();
 });
 var animation = new function(board_height, board_width, preamble){
@@ -49,25 +50,7 @@ var animation = new function(board_height, board_width, preamble){
 				easing:		"easeOutQuint"
 			});
 	}
-	
-	function moveLeftOrRight(token) {
-		$("#" + token).animate({
-			left: 		horizontal
-		}, {
-			queue:		true,
-			duration:	"fast",
-			easing:		"easeOutBounce",
-			complete: 	function() {
-							if ($("#" + token).css("left").replace("px","") >= board_width - square_width )
-							{
-								horizontal = "-=" + square_width;
-							} else if ($("#" + token).css("left").replace("px","") <= 0 ){
-								horizontal = "+=" + square_width;
-							}
-						}
-		});
-	}
-	
+
 	self.resetTokens = 	function(players){
 							$(".tokens").css({
 								top: 	function(index, value){
@@ -79,9 +62,3 @@ var animation = new function(board_height, board_width, preamble){
 							});
 						}
 }(1760,1760);
-
-
-//Border 22 pixels
-//Spacing 6 pixels
-//height 170 pixels
-//width 170 pixels

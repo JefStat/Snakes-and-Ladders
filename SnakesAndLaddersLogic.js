@@ -165,6 +165,5 @@ var game = new function(){
 			game.nextTurn();
 		}
 		alert("Game Over player " + game.getPlayerTurn().getName() + " is the victor.");
-		game.gameState();
 	}
 }();
